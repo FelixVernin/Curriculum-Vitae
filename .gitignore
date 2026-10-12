@@ -12,3 +12,9 @@ coverage/
 public/CV_text.txt
 chatbot/.dev.vars
 chatbot/.wrangler/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
