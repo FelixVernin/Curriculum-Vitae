@@ -2,10 +2,8 @@
 import site from '../data/site'
 ---
 <footer class="site-footer">
-  <div class="inner">
-    <p>{site.name} — <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a> — <a href={site.githubProfile} target="_blank" rel="noopener">GitHub</a></p>
-    {site.contact?.email ? <p>Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p> : null}
-    {site.contact?.phone ? <p>Tél: <a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a></p> : null}
-    <p><a href={site.cvPath} target="_blank" rel="noopener">Consulter mon CV (PDF)</a></p>
+  <div class="inner footer-inner">
+    <p>{site.name} / portfolio 2026</p>
+    <p><a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a href={site.githubProfile} target="_blank" rel="noopener">GitHub</a> · <a href={site.cvPath} target="_blank" rel="noopener">CV PDF</a></p>
   </div>
 </footer>

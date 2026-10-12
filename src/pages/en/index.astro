@@ -9,22 +9,41 @@ import site from '../../data/site'
 
   <section id="presentation" class="hero">
     <div class="inner">
-      <h2>{site.name}</h2>
-      <p class="lead">{site.position}. I design machine learning pipelines, from data preparation to model evaluation and result delivery.</p>
-      <p class="actions"><a href="/en/#projects" class="btn">See my projects</a> <a href={site.cvPath} class="btn muted">View my CV</a></p>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Portfolio / AI engineering / 2026</p>
+          <h2>I turn<br /><span>signals</span><br />into decisions.</h2>
+          <p class="lead">I build machine learning pipelines that are legible, testable and useful: from raw data to an interface people can actually use.</p>
+          <p class="actions"><a href="#projects" class="btn">Explore projects</a> <a href={site.cvPath} class="btn muted">Open my CV</a></p>
+        </div>
+        <aside class="signal-panel" aria-label="Machine learning pipeline console">
+          <div class="panel-top"><span>MODEL_SIGNAL / 001</span><span class="live">LIVE</span></div>
+          <div class="console">
+            <div class="console-line"><span>input.stream</span><strong class="console-value">PWV_DATA</strong></div>
+            <div class="console-line"><span>model.family</span><strong class="console-value">ENSEMBLE</strong></div>
+            <div><div class="console-line"><span>confidence</span><strong class="console-value" data-confidence>0.87</strong></div><div class="console-bar"><i data-confidence-bar></i></div></div>
+            <div class="console-line"><span>status</span><strong class="console-value" data-console-status>READY_TO_SHIP</strong></div>
+            <button class="console-button" type="button" data-run-signal>› run a new inference</button>
+          </div>
+        </aside>
+      </div>
+      <div class="hero-foot">
+        <div class="metric"><strong>02</strong><span>field experiences</span></div>
+        <div class="metric"><strong>04</strong><span>public projects</span></div>
+        <div class="metric"><strong>810</strong><span>TOEIC score</span></div>
+        <div class="metric"><strong>06</strong><span>model families tested</span></div>
+      </div>
     </div>
   </section>
 
   <section id="experiences" class="section">
     <div class="inner">
-      <h3>Experiences</h3>
+      <div class="section-heading"><h3>Field notes</h3><span class="section-index">02 / experience</span></div>
       <div class="experiences">
-        {site.experiences?.map(e => (
-          <article class="experience">
-            <h4>{e.org}</h4>
-            <p class="meta">{e.role} {e.period ? `— ${e.period}` : ''} {e.location ? `— ${e.location}` : ''}</p>
-            <p>{e.descriptionEn}</p>
-            {e.technologies && e.technologies.length ? <p class="tech">Tech: {e.technologies.join(', ')}</p> : null}
+        {site.experiences?.map((e, index) => (
+          <article class="experience" style={`animation-delay: ${index * 120}ms`}>
+            <div><h4>{e.org}</h4><p class="meta">{e.period}{e.location ? ` / ${e.location}` : ''}</p></div>
+            <div><p>{e.descriptionEn}</p><p class="tech">{e.technologies?.join(' · ')}</p></div>
           </article>
         ))}
       </div>
@@ -33,13 +52,21 @@ import site from '../../data/site'
 
   <section id="projects" class="section">
     <div class="inner">
-      <h3>Projects</h3>
+      <div class="section-heading"><h3>Selected projects</h3><span class="section-index">03 / laboratory</span></div>
+      <div class="filter-bar" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="AI" aria-pressed="false">AI / ML</button>
+        <button class="filter" type="button" data-filter="Product" aria-pressed="false">Product</button>
+        <button class="filter" type="button" data-filter="Design" aria-pressed="false">Design</button>
+        <button class="filter" type="button" data-filter="Data" aria-pressed="false">Data</button>
+      </div>
       <ul class="projects">
-        {site.projects.map(p => (
-          <li>
-            <h4>{p.title}</h4>
-            <p>{p.description}</p>
-            {p.github ? <p><a href={p.github} target="_blank" rel="noopener">See code on GitHub</a></p> : null}
+        {site.projects.map((p, index) => (
+          <li class="project" data-project-kind={p.kind}>
+            <div class="project-top"><span>0{index + 1} / {p.kind}</span><span class="project-kind">{p.tags[0]}</span></div>
+            <h4>{p.title}</h4><p>{p.description}</p>
+            <div class="tags">{p.tags.map(tag => <span class="tag">{tag}</span>)}</div>
+            {p.github ? <a class="project-link" href={p.github} target="_blank" rel="noopener">View repository</a> : null}
           </li>
         ))}
       </ul>
@@ -47,37 +74,40 @@ import site from '../../data/site'
   </section>
 
   <section id="skills-education" class="section">
-    <div class="inner">
-      <h3>Skills & Education</h3>
-      <div class="edu">
-        <h4>Education</h4>
-        <ul>
-          {site.education?.map(ed => (
-            <li><strong>{ed.period}</strong> — {ed.title}, {ed.place}{ed.details ? ` — ${ed.details}` : ''}</li>
-          ))}
-        </ul>
-      </div>
-      <div class="skills">
-        <h4>Skills</h4>
-        {site.skills?.map(s => (
-          <p><strong>{s.category}:</strong> {s.items.join(', ')}</p>
-        ))}
-      </div>
-      <div class="langs">
-        <h4>Languages</h4>
-        <p>{site.languages?.map(l => `${l.name} (${l.level})`).join(' · ')}</p>
-      </div>
+    <div class="inner profile-grid">
+      <div><div class="section-heading"><h3>Foundations</h3><span class="section-index">04 / toolkit</span></div><div class="profile-block edu"><h4>Education</h4><ul>{site.education?.map(ed => <li><strong>{ed.period}</strong> {ed.title}<br /><span class="meta">{ed.place}</span></li>)}</ul></div></div>
+      <div><div class="profile-block"><h4>Skills</h4><div class="skills">{site.skills?.flatMap(s => s.items).map(skill => <p>{skill}</p>)}</div></div><div class="profile-block langs"><h4>Languages</h4><p>{site.languages?.map(l => `${l.name} / ${l.level}`).join(' · ')}</p></div></div>
     </div>
   </section>
 
-  <section id="contact" class="section">
-    <div class="inner">
-      <h3>Contact</h3>
-      {site.contact?.email ? <p>Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p> : null}
-      {site.contact?.phone ? <p>Phone: <a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a></p> : null}
-      <p>LinkedIn: <a href={site.linkedin} target="_blank" rel="noopener">profile</a> — GitHub: <a href={site.githubProfile} target="_blank" rel="noopener">profile</a></p>
-    </div>
-  </section>
+  <section id="contact" class="section"><div class="inner contact-section"><div><p class="eyebrow">Final block / contact</p><h3>Let’s build something precise.</h3></div><div><p class="contact-copy">Open to a full-time role in machine learning, data or AI engineering.</p><p class="contact-links"><button class="copy-email" type="button" data-copy-email={site.contact?.email}>Copy email</button><a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a><a href={site.githubProfile} target="_blank" rel="noopener">GitHub ↗</a></p></div></div></section>
 
   <Footer slot="footer" />
 </Base>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
+  const projects = document.querySelectorAll<HTMLElement>('[data-project-kind]')
+  filters.forEach((filter) => filter.addEventListener('click', () => {
+    const value = filter.dataset.filter
+    filters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)))
+    projects.forEach((project) => project.classList.toggle('is-hidden', value !== 'all' && project.dataset.projectKind !== value))
+  }))
+
+  const signalButton = document.querySelector<HTMLButtonElement>('[data-run-signal]')
+  signalButton?.addEventListener('click', () => {
+    const confidence = (0.72 + Math.random() * 0.24).toFixed(2)
+    document.querySelector('[data-confidence]')!.textContent = confidence
+    document.querySelector('[data-confidence-bar]')!.setAttribute('style', `width: ${Number(confidence) * 100}%`)
+    document.querySelector('[data-console-status]')!.textContent = 'INFERENCE_DONE'
+    window.setTimeout(() => { document.querySelector('[data-console-status]')!.textContent = 'READY_TO_SHIP' }, 1800)
+  })
+
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-email]')
+  copyButton?.addEventListener('click', async () => {
+    if (!copyButton.dataset.copyEmail) return
+    await navigator.clipboard.writeText(copyButton.dataset.copyEmail)
+    copyButton.textContent = 'Email copied ✓'
+    window.setTimeout(() => { copyButton.textContent = 'Copy email' }, 1800)
+  })
+</script>

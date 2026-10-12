@@ -1,5 +1,6 @@
 ---
 import type { SiteData } from '../data/site'
+import '../styles.css'
 const { title = 'Portfolio' } = Astro.props
 ---
 <!doctype html>
@@ -8,7 +9,6 @@ const { title = 'Portfolio' } = Astro.props
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#content">Aller au contenu</a>

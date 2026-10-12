@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import site from '../data/site'
+---
+<Base title={`${site.name} — Stage IAC / prévision probabiliste du PWV`}>
+  <Header slot="header" />
+
+  <section class="stage-hero">
+    <div class="inner stage-grid">
+      <div>
+        <p class="eyebrow">Étude de cas / Instituto de Astrofísica de Canarias</p>
+        <h2>Prévoir<br /><span>l’invisible.</span></h2>
+        <p class="stage-intro">Pendant six mois, j’ai étudié la prévision probabiliste multi-horizons de la vapeur d’eau précipitable pour aider à planifier les observations infrarouges depuis Izaña, à Tenerife.</p>
+      </div>
+      <div class="stage-meta">
+        <div>MISSION<strong>Modélisation &amp; recherche appliquée</strong></div>
+        <div>LOCATION<strong>Izaña / Tenerife / Canary Islands</strong></div>
+        <div>PERIOD<strong>Avril — Septembre 2026</strong></div>
+        <div>SUPERVISION<strong>Andrés Asensio Ramos · Casiana Muñoz-Tuñón</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage-kpis"><div class="inner stage-kpis">
+    <div class="stage-kpi"><strong>35 088</strong><span>observations, toutes les 30 min</span></div>
+    <div class="stage-kpi"><strong>30 min → 32 h</strong><span>horizons de prévision</span></div>
+    <div class="stage-kpi"><strong>0,57 mm</strong><span>MAE NGBoost à 30 min</span></div>
+    <div class="stage-kpi"><strong>95 %</strong><span>couverture calibrée visée</span></div>
+  </div></section>
+
+  <section class="stage-section"><div class="inner stage-layout">
+    <div><p class="stage-label">01 / Le problème</p><h3>Donner une marge de décision au ciel.</h3></div>
+    <div class="stage-copy"><p class="dropcap">La vapeur d’eau absorbe une partie du rayonnement infrarouge. Pour un observatoire, connaître seulement la prochaine valeur de PWV ne suffit pas : il faut aussi savoir à quel point cette prévision est fiable.</p><p>J’ai donc formulé le sujet comme un problème de séries temporelles probabilistes : prévoir une distribution pour chaque horizon, mesurer sa qualité et rendre ses incertitudes lisibles dans un dashboard.</p><div class="stage-note">Le seuil de 5 mm sert de repère opérationnel dans l’étude : il permet d’estimer la probabilité d’une condition défavorable, sans réduire toute la décision à une simple classe.</div></div>
+    <div class="report-gallery">
+      <figure class="report-figure"><img src="/stage/figures/page-04-image-1.jpeg" alt="Observatoire d’Izaña à Tenerife" /><figcaption>Le site d’Izaña, Tenerife / source : rapport de stage</figcaption></figure>
+      <figure class="report-figure wide"><img src="/stage/figures/page-09-image-1.jpeg" alt="Distribution du PWV dans le jeu de données" /><figcaption>Une distribution asymétrique : les épisodes de PWV élevé sont rares mais importants</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="stage-section"><div class="inner stage-layout">
+    <div><p class="stage-label">02 / De la mesure au modèle</p><h3>Un pipeline qui garde la trace de chaque choix.</h3><p class="stage-copy">Les mesures GNSS d’Izaña ont été nettoyées, synchronisées et enrichies avec des variables de tendance, d’accélération, de variabilité et de cycle temporel.</p></div>
+    <div class="pipeline">
+      <div class="pipeline-step"><strong>Mesures locales</strong><span>PWV, pression, température, délai troposphérique</span></div>
+      <div class="pipeline-step"><strong>Feature engineering</strong><span>lags 30 min → 12 h · fenêtres jusqu’à 24 h · encodage cyclique</span></div>
+      <div class="pipeline-step"><strong>Protocole temporel</strong><span>80 % train · 10 % validation · 10 % test chronologique</span></div>
+      <div class="pipeline-step"><strong>Modèles comparés</strong><span>XGBoost · Random Forest · LSTM · BiLSTM · Transformer · NGBoost</span></div>
+      <div class="pipeline-step"><strong>Sortie décisionnelle</strong><span>prévision centrale · intervalles · probabilité de dépassement</span></div>
+    </div>
+  </div></section>
+
+  <section class="stage-section"><div class="inner">
+    <div class="section-heading"><h3>Une prévision n’est pas un point.</h3><span class="section-index">03 / signal</span></div>
+    <div class="data-visual"><div class="visual-head"><span>NGBOOST / MULTI-HORIZON FORECAST</span><span>FIG. 5 / PWV</span></div><div class="chart-wrap"><img class="report-image" src="/stage/figures/page-17-image-1.jpeg" alt="Prévision NGBoost du PWV avec intervalles d’incertitude à 68 et 95 pour cent" /></div><p class="visual-caption">Figure originale du rapport : historique, futur observé, prévision centrale et bandes de confiance.</p></div>
+  </div></section>
+
+  <section class="stage-section"><div class="inner">
+    <div class="section-heading"><h3>Ce que disent les résultats.</h3><span class="section-index">04 / mesures</span></div>
+    <div class="results-grid"><table class="results-table"><thead><tr><th>Horizon</th><th>MAE</th><th>RMSE</th><th>R²</th></tr></thead><tbody><tr><td>30 min</td><td>0,57 mm</td><td>1,13 mm</td><td>0,92</td></tr><tr><td>1 h</td><td>0,67 mm</td><td>1,11 mm</td><td>0,93</td></tr><tr><td>4 h</td><td>1,03 mm</td><td>1,47 mm</td><td>0,87</td></tr><tr><td>8 h</td><td>1,47 mm</td><td>2,11 mm</td><td>0,73</td></tr><tr><td>16 h</td><td>2,08 mm</td><td>2,90 mm</td><td>0,49</td></tr><tr><td>32 h</td><td>2,61 mm</td><td>3,60 mm</td><td>0,21</td></tr></tbody></table><div><div class="result-callout"><strong>× 4,6</strong><p>La MAE augmente entre 30 minutes et 32 heures. L’information locale reste très utile à court terme, mais les horizons longs demandent des signaux externes.</p></div><figure class="report-figure"><img src="/stage/figures/page-20-image-1.jpeg" alt="Comparaison des RMSE, MAE, CRPS et largeur des intervalles par horizon" /><figcaption>Les KPI se dégradent avec l’horizon, tandis que les intervalles s’élargissent.</figcaption></figure></div></div>
+  </div></section>
+
+  <section class="stage-section"><div class="inner calibration"><div class="calibration-copy"><p class="stage-label">05 / Incertitude</p><h3>Une bande doit mériter la confiance.</h3><p>J’ai évalué la couverture empirique des intervalles à 68 %, 95 % et 99 %, puis calibré chaque horizon séparément. Une bonne prévision probabiliste est à la fois centrée, assez étroite et honnête sur ses erreurs.</p><p class="stage-note">NGBoost estime une moyenne et un écart-type conditionnels. La sortie devient alors un outil de décision plutôt qu’une simple valeur prédite.</p></div><div class="data-visual"><div class="visual-head"><span>CALIBRATION / COVERAGE</span><span>FIG. 8 / BEFORE → AFTER</span></div><div class="chart-wrap"><img class="report-image" src="/stage/figures/page-21-image-1.jpeg" alt="Courbes de couverture empirique avant et après calibration" /></div><p class="visual-caption">Figure originale du rapport : la calibration rapproche la couverture observée de la couverture nominale.</p></div></div>
+  </section>
+
+  <section class="stage-section"><div class="inner stage-layout"><div><p class="stage-label">06 / Rendre le modèle lisible</p><h3>Le dashboard comme instrument de recherche.</h3></div><div><div class="dashboard-frame"><div class="dashboard-bar"><i></i><i></i><i></i></div><div class="dashboard-figures"><img src="/stage/figures/page-26-image-1.jpeg" alt="Menu de navigation du dashboard Streamlit" /><img src="/stage/figures/page-27-image-1.jpeg" alt="Vue Model Playground du dashboard Streamlit" /><img src="/stage/figures/page-28-image-1.jpeg" alt="Vue Limit Cases du dashboard Streamlit" /></div></div><p class="visual-caption">Captures originales du prototype Streamlit : navigation, comparaison multi-horizon et analyse des cas limites.</p></div></div></section>
+
+  <section class="stage-section"><div class="inner"><div class="quote-block"><p>Le résultat le plus important n’est pas le score : c’est de savoir <strong>quand le modèle ne sait pas.</strong></p></div><div class="report-gallery"><figure class="report-figure wide"><img src="/stage/figures/page-25-image-1.jpeg" alt="Exemple de prévision NGBoost lors d'une anomalie du PWV" /><figcaption>Cas d’anomalie : une variation brutale peut dépasser l’intervalle prévu.</figcaption></figure></div><div class="stage-copy"><p>Les hausses rapides du PWV restent difficiles à anticiper avec les seules mesures locales. Le travail ouvre donc une suite logique : données plus récentes, prévisions WRF, sites voisins, suivi de dérive et validation des dépassements de seuil.</p><a class="stage-footer-link" href="/#projects">Retourner aux projets</a></div></div></section>
+
+  <Footer slot="footer" />
+</Base>

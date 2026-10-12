@@ -3,6 +3,8 @@ export type Project = {
   description: string
   github?: string
   demo?: string
+  kind: 'AI' | 'Product' | 'Design' | 'Data'
+  tags: string[]
 }
 
 export type Contact = {
@@ -55,7 +57,7 @@ export type Experience = {
 }
 
 const site: SiteData = {
-  name: 'Félix Vernin',
+  name: 'Felix VERNIN',
   position: 'Machine Learning Engineer',
   location: 'Nice, 06000, France',
   cvPath: '/CV_Felix_Vernin_EN.pdf',
@@ -79,7 +81,7 @@ const site: SiteData = {
   ],
   languages: [
     { name: 'French', level: 'Native' },
-    { name: 'English', level: 'B2 (EF Education First)' },
+    { name: 'English', level: 'TOEIC 810' },
     { name: 'Spanish', level: 'Notions' }
   ],
   interests: ['Programming and personal projects', 'Sports'],
@@ -87,22 +89,30 @@ const site: SiteData = {
     {
       title: 'vAIpor (IAC internship)',
       description: 'Machine learning work for PWV prediction and dashboarding at the Instituto de Astrofísica de Canarias.',
-      github: 'https://github.com/FelixVernin/vAIpor'
+      github: 'https://github.com/FelixVernin/vAIpor',
+      kind: 'AI',
+      tags: ['PyTorch', 'Forecasting', 'Research']
     },
     {
       title: 'Ascens — Elevator game web app (design)',
       description: 'A web application designed to play the elevator game, focusing on UX and accessible interactions.',
-      github: 'https://github.com/FelixVernin/Ascens'
+      github: 'https://github.com/FelixVernin/Ascens',
+      kind: 'Product',
+      tags: ['UX', 'Web', 'Accessibility']
     },
     {
       title: 'profeel — Design thinking project',
       description: 'Design thinking project addressing user needs and prototyping workflows.',
-      github: 'https://github.com/FelixVernin/profeel'
+      github: 'https://github.com/FelixVernin/profeel',
+      kind: 'Design',
+      tags: ['Research', 'Prototype', 'Users']
     },
     {
       title: 'RandSpot — Spotify playlist randomizer',
       description: 'A small tool to randomize playlists and provide a fresh listening experience.',
-      github: 'https://github.com/FelixVernin/RandSpot'
+      github: 'https://github.com/FelixVernin/RandSpot',
+      kind: 'Data',
+      tags: ['JavaScript', 'API', 'Product']
     }
   ]
 
