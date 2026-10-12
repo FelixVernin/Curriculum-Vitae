@@ -1,0 +1,3 @@
+AI_MODEL=@cf/meta/llama-3.2-3b-instruct
+ALLOWED_ORIGINS=http://localhost:4321,https://curriculum-vitae.felix-vernin.workers.dev
+CHATBOT_ENABLED=false

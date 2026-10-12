@@ -9,6 +9,7 @@ Key points
 - Output folder: `dist` (ready for Cloudflare Pages).
 - Content source: `src/data/site.ts` (centralized, typed content for FR/EN).
 - CV PDF: `public/CV_Felix_Vernin_EN.pdf` (source of truth for dates and wording).
+- Chatbot recruteur: Worker séparé dans `chatbot/`, basé sur Workers AI.
 
 Quick start (development)
 
@@ -29,6 +30,20 @@ Preview the built site locally (serves `dist`)
 ```bash
 npm run preview
 ```
+
+Chatbot recruteur
+
+Le chatbot est un projet Worker indépendant. Le portfolio reste Astro statique et ne contient aucun secret ni binding Cloudflare.
+
+```bash
+cd chatbot
+npm install
+npm test
+```
+
+Pour activer l’interface après déploiement manuel du Worker, créer `.env` à la racine à partir de `.env.example`, définir `PUBLIC_CHATBOT_API_URL`, puis reconstruire le portfolio. Sans cette variable, l’interface affiche un état « Assistant bientôt disponible » et n’envoie aucune requête.
+
+La documentation complète du Worker, de son profil source, des quotas Workers AI et du déploiement est dans [chatbot/README.md](chatbot/README.md).
 
 What I added/checked
 

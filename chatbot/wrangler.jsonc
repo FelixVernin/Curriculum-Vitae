@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "felix-portfolio-chatbot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-12",
+  "vars": {
+    "AI_MODEL": "@cf/meta/llama-3.2-3b-instruct",
+    "ALLOWED_ORIGINS": "https://curriculum-vitae.felix-vernin.workers.dev",
+    "CHATBOT_ENABLED": "false"
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "ratelimits": [
+    {
+      "name": "CHATBOT_RATE_LIMITER",
+      "namespace_id": "20261013",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
+  ]
+}

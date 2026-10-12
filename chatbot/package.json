@@ -1,0 +1,17 @@
+{
+  "name": "felix-portfolio-chatbot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-profile": "node scripts/generate-profile.mjs",
+    "dev": "npm run generate-profile && wrangler dev",
+    "test": "npm run generate-profile && vitest run",
+    "deploy": "npm run generate-profile && wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261012.1",
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.149.0"
+  }
+}

@@ -1,10 +1,12 @@
 ---
 import type { SiteData } from '../data/site'
 import '../styles.css'
+import Chatbot from '../components/Chatbot.astro'
 const { title = 'Portfolio' } = Astro.props
+const language = Astro.url.pathname.startsWith('/en') ? 'en' : 'fr'
 ---
 <!doctype html>
-<html lang="fr">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,5 +19,6 @@ const { title = 'Portfolio' } = Astro.props
       <slot />
     </main>
     <slot name="footer" />
+    <Chatbot />
   </body>
 </html>

@@ -1,0 +1,174 @@
+---
+import site from '../data/site'
+
+const isEnglish = Astro.url.pathname.startsWith('/en')
+const copy = isEnglish
+  ? {
+      button: 'Questions about my profile',
+      title: 'Portfolio assistant',
+      intro: 'Hello! I am the AI assistant for Felix’s portfolio. Ask me about his internship, skills or projects.',
+      unavailable: 'Assistant coming soon',
+      unavailableDetail: 'The service is not configured on this deployment yet.',
+      clear: 'Clear',
+      close: 'Close assistant',
+      send: 'Send',
+      placeholder: 'Ask a question…',
+      loading: 'Thinking…',
+      note: 'AI assistant: answers may contain errors. Messages are sent to Cloudflare to generate a response. Do not share sensitive information.',
+      alternative: 'Prefer a direct conversation?',
+      suggestions: ['What did he build during his IAC internship?', 'Which technologies does he use?', 'What are his personal projects?', 'What kind of role is he looking for?'],
+      error: 'The assistant is temporarily unavailable. Please try again later.'
+    }
+  : {
+      button: 'Questions sur mon parcours',
+      title: 'Assistant portfolio',
+      intro: 'Bonjour ! Je suis l’assistant IA du portfolio de Félix. Vous pouvez me poser des questions sur son stage, ses compétences ou ses projets.',
+      unavailable: 'Assistant bientôt disponible',
+      unavailableDetail: 'Le service n’est pas encore configuré sur ce déploiement.',
+      clear: 'Effacer',
+      close: 'Fermer l’assistant',
+      send: 'Envoyer',
+      placeholder: 'Posez une question…',
+      loading: 'Réflexion…',
+      note: 'Assistant IA : ses réponses peuvent contenir des erreurs. Les messages sont transmis à Cloudflare pour générer une réponse. Évitez de partager des informations sensibles.',
+      alternative: 'Vous préférez échanger directement ?',
+      suggestions: ['Qu’a-t-il réalisé pendant son stage à l’IAC ?', 'Quelles technologies utilise-t-il ?', 'Quels sont ses projets personnels ?', 'Quel type de poste recherche-t-il ?'],
+      error: 'L’assistant est temporairement indisponible. Réessayez plus tard.'
+    }
+---
+<div class="chatbot" data-chatbot data-api-url={import.meta.env.PUBLIC_CHATBOT_API_URL || ''} data-locale={isEnglish ? 'en' : 'fr'} data-error-message={copy.error}>
+  <button class="chatbot-launcher" type="button" data-chatbot-open aria-expanded="false" aria-controls="chatbot-panel">
+    <span class="chatbot-dot" aria-hidden="true"></span>{copy.button}
+  </button>
+  <section class="chatbot-panel" id="chatbot-panel" data-chatbot-panel hidden aria-labelledby="chatbot-title">
+    <div class="chatbot-head">
+      <div><p class="chatbot-kicker">RECRUITER_MODE / AI</p><h2 id="chatbot-title">{copy.title}</h2></div>
+      <div class="chatbot-head-actions"><button class="chatbot-clear" type="button" data-chatbot-clear>{copy.clear}</button><button class="chatbot-close" type="button" data-chatbot-close aria-label={copy.close}>×</button></div>
+    </div>
+    <div class="chatbot-messages" data-chatbot-messages aria-live="polite" aria-atomic="false">
+      <div class="chatbot-message assistant"><p>{copy.intro}</p></div>
+      <div class="chatbot-unavailable" data-chatbot-unavailable hidden><strong>{copy.unavailable}</strong><span>{copy.unavailableDetail}</span></div>
+    </div>
+    <div class="chatbot-suggestions" data-chatbot-suggestions>
+      {copy.suggestions.map((suggestion) => <button type="button" data-chatbot-suggestion>{suggestion}</button>)}
+    </div>
+    <form class="chatbot-form" data-chatbot-form>
+      <label class="sr-only" for="chatbot-input">{copy.placeholder}</label>
+      <textarea id="chatbot-input" data-chatbot-input maxlength="1000" rows="2" placeholder={copy.placeholder}></textarea>
+      <button class="chatbot-send" type="submit" data-chatbot-send>{copy.send}<span aria-hidden="true">↗</span></button>
+    </form>
+    <p class="chatbot-note">{copy.note}</p>
+    <p class="chatbot-alternative">{copy.alternative} <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a> · <a href={site.cvPath}>CV PDF ↗</a></p>
+  </section>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-chatbot]')
+  if (root) {
+    const apiUrl = root.dataset.apiUrl || ''
+    const launcher = root.querySelector<HTMLButtonElement>('[data-chatbot-open]')!
+    const panel = root.querySelector<HTMLElement>('[data-chatbot-panel]')!
+    const close = root.querySelector<HTMLButtonElement>('[data-chatbot-close]')!
+    const clear = root.querySelector<HTMLButtonElement>('[data-chatbot-clear]')!
+    const form = root.querySelector<HTMLFormElement>('[data-chatbot-form]')!
+    const input = root.querySelector<HTMLTextAreaElement>('[data-chatbot-input]')!
+    const send = root.querySelector<HTMLButtonElement>('[data-chatbot-send]')!
+    const messages = root.querySelector<HTMLElement>('[data-chatbot-messages]')!
+    const suggestions = root.querySelector<HTMLElement>('[data-chatbot-suggestions]')!
+    const unavailable = root.querySelector<HTMLElement>('[data-chatbot-unavailable]')!
+    const locale = root.dataset.locale === 'en' ? 'en' : 'fr'
+    const errorMessage = root.dataset.errorMessage || (locale === 'en' ? 'The assistant is temporarily unavailable.' : 'L’assistant est temporairement indisponible.')
+    const initialMessage = messages.querySelector('.chatbot-message')!.cloneNode(true)
+    let history: Array<{ role: 'user' | 'assistant'; content: string }> = []
+    let busy = false
+    let lastFocus: HTMLElement = launcher
+
+    const setUnavailable = () => {
+      if (!apiUrl) {
+        unavailable.hidden = false
+        input.disabled = true
+        send.disabled = true
+      }
+    }
+
+    const openPanel = () => {
+      lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : launcher
+      panel.hidden = false
+      launcher.setAttribute('aria-expanded', 'true')
+      input.focus()
+    }
+
+    const closePanel = () => {
+      panel.hidden = true
+      launcher.setAttribute('aria-expanded', 'false')
+      lastFocus.focus()
+    }
+
+    const addMessage = (role: 'user' | 'assistant', content: string) => {
+      const message = document.createElement('div')
+      message.className = `chatbot-message ${role}`
+      const paragraph = document.createElement('p')
+      paragraph.textContent = content
+      message.append(paragraph)
+      messages.append(message)
+      messages.scrollTop = messages.scrollHeight
+    }
+
+    const setBusy = (value: boolean) => {
+      busy = value
+      send.disabled = value
+      input.disabled = value
+      send.firstChild!.textContent = value ? (locale === 'en' ? 'Thinking… ' : 'Réflexion… ') : (locale === 'en' ? 'Send ' : 'Envoyer ')
+    }
+
+    const resetConversation = () => {
+      history = []
+      messages.replaceChildren(initialMessage.cloneNode(true))
+      setUnavailable()
+      input.focus()
+    }
+
+    launcher.addEventListener('click', () => panel.hidden ? openPanel() : closePanel())
+    close.addEventListener('click', closePanel)
+    clear.addEventListener('click', resetConversation)
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) closePanel()
+    })
+    root.querySelectorAll<HTMLButtonElement>('[data-chatbot-suggestion]').forEach((button) => {
+      button.addEventListener('click', () => {
+        input.value = button.textContent || ''
+        input.focus()
+      })
+    })
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault()
+      const message = input.value.trim()
+      if (busy || !message || !apiUrl) return
+      addMessage('user', message)
+      input.value = ''
+      suggestions.hidden = true
+      setBusy(true)
+      try {
+        const response = await fetch(`${apiUrl.replace(/\/$/, '')}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history })
+        })
+        const data = await response.json() as { answer?: string }
+        if (!response.ok || typeof data.answer !== 'string') throw new Error('chat request failed')
+        addMessage('assistant', data.answer)
+        history.push({ role: 'user', content: message }, { role: 'assistant', content: data.answer })
+        while (history.length > 6) history.shift()
+        if (history[0]?.role === 'assistant') history.shift()
+      } catch {
+        addMessage('assistant', errorMessage)
+      } finally {
+        setBusy(false)
+        input.focus()
+      }
+    })
+
+    setUnavailable()
+  }
+</script>

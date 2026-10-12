@@ -10,3 +10,5 @@ yarn-error.log*
 coverage/
 .cache/
 public/CV_text.txt
+chatbot/.dev.vars
+chatbot/.wrangler/
