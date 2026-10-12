@@ -288,5 +288,9 @@ a { color: inherit; }
 .chatbot-note, .chatbot-alternative { margin: 0; padding: 0 1rem .7rem; color: var(--muted); font: .61rem 'DM Mono', monospace; line-height: 1.45; }
 .chatbot-alternative { padding-bottom: 1rem; }
 .chatbot-alternative a { color: var(--blue); }
+.chatbot-panel[hidden],
+.chatbot-unavailable[hidden] {
+  display: none;
+}
 @media (max-width: 540px) { .chatbot { right: .75rem; bottom: .75rem; } .chatbot-panel { max-height: calc(100vh - 4.8rem); box-shadow: 6px 6px 0 var(--blue); } .chatbot-messages { max-height: 34vh; } }
 @media (prefers-reduced-motion: reduce) { .chatbot-launcher { transition: none; } }
