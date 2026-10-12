@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import site from '../../data/site'
+---
+<Base title={`${site.name} — ${site.position}`}>
+  <Header slot="header" />
+
+  <section id="presentation" class="hero">
+    <div class="inner">
+      <h2>{site.name}</h2>
+      <p class="lead">{site.position}. I design machine learning pipelines, from data preparation to model evaluation and result delivery.</p>
+      <p class="actions"><a href="/en/#projects" class="btn">See my projects</a> <a href={site.cvPath} class="btn muted">View my CV</a></p>
+    </div>
+  </section>
+
+  <section id="experiences" class="section">
+    <div class="inner">
+      <h3>Experiences</h3>
+      <div class="experiences">
+        {site.experiences?.map(e => (
+          <article class="experience">
+            <h4>{e.org}</h4>
+            <p class="meta">{e.role} {e.period ? `— ${e.period}` : ''} {e.location ? `— ${e.location}` : ''}</p>
+            <p>{e.descriptionEn}</p>
+            {e.technologies && e.technologies.length ? <p class="tech">Tech: {e.technologies.join(', ')}</p> : null}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="inner">
+      <h3>Projects</h3>
+      <ul class="projects">
+        {site.projects.map(p => (
+          <li>
+            <h4>{p.title}</h4>
+            <p>{p.description}</p>
+            {p.github ? <p><a href={p.github} target="_blank" rel="noopener">See code on GitHub</a></p> : null}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills-education" class="section">
+    <div class="inner">
+      <h3>Skills & Education</h3>
+      <div class="edu">
+        <h4>Education</h4>
+        <ul>
+          {site.education?.map(ed => (
+            <li><strong>{ed.period}</strong> — {ed.title}, {ed.place}{ed.details ? ` — ${ed.details}` : ''}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="skills">
+        <h4>Skills</h4>
+        {site.skills?.map(s => (
+          <p><strong>{s.category}:</strong> {s.items.join(', ')}</p>
+        ))}
+      </div>
+      <div class="langs">
+        <h4>Languages</h4>
+        <p>{site.languages?.map(l => `${l.name} (${l.level})`).join(' · ')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="inner">
+      <h3>Contact</h3>
+      {site.contact?.email ? <p>Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p> : null}
+      {site.contact?.phone ? <p>Phone: <a href={`tel:${site.contact.phone}`}>{site.contact.phone}</a></p> : null}
+      <p>LinkedIn: <a href={site.linkedin} target="_blank" rel="noopener">profile</a> — GitHub: <a href={site.githubProfile} target="_blank" rel="noopener">profile</a></p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
