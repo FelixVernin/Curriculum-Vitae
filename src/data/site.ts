@@ -69,9 +69,9 @@ const site: SiteData = {
     location: 'Nice, 06000, France'
   },
   education: [
-    { period: '2023–2026', title: 'Master of Science, ESIEE Paris', place: 'ESIEE Paris, Paris', details: 'Studies in artificial intelligence and cybersecurity, including machine learning, data analysis, network security and ethical hacking.' },
-    { period: '2021–2023', title: 'PCSI–PSI Preparatory Classes', place: 'Centre International de Valbonne, Sophia Antipolis' },
-    { period: '2021', title: 'French Baccalauréat', place: 'Lycée Albert Calmette, Nice', details: 'Specializations in mathematics and physics, with advanced English studies.' }
+    { period: '2023–2026', title: "Diplome d'ingenieur en IA et en cybersécurité à l'ESIEE Paris", place: 'ESIEE Paris, Paris', details: 'Studies in artificial intelligence and cybersecurity, including machine learning, data analysis, network security and ethical hacking.' },
+    { period: '2021–2023', title: 'PCSI–PSI Classe préparatoire aux grandes écoles', place: 'Centre International de Valbonne, Sophia Antipolis' },
+    { period: '2021', title: "Baccalauréat", place: 'Lycée Albert Calmette, Nice', details: 'Spécialisation en Maths et en Physique, ainsi que anglais litteraire' }
   ],
   skills: [
     { category: 'Programming', items: ['Python', 'Java', 'C/C++'] },
@@ -80,8 +80,8 @@ const site: SiteData = {
     { category: 'Cybersecurity', items: ['Network security', 'Ethical hacking'] }
   ],
   languages: [
-    { name: 'French', level: 'Native' },
-    { name: 'English', level: 'TOEIC 810' },
+    { name: 'Français', level: 'Natif' },
+    { name: 'Anglais', level: 'TOEIC 810, Stage de 6mois à l\'étranger, cours en anglais pendant 2ans' },
     { name: 'Spanish', level: 'Notions' }
   ],
   interests: ['Programming and personal projects', 'Sports'],
