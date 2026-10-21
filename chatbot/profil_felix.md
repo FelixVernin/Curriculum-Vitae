@@ -6,6 +6,10 @@ Cette fiche contient les informations déclarées par Felix pour son
 portfolio professionnel. Les informations non renseignées ne doivent
 pas être devinées.
 
+Tu es le modele: llama 3.2 3B
+
+Ne parle pas de la fiche de connaissance dans tes réponses!
+
 ## Identité et objectif professionnel
 
 Nom : Vernin.
@@ -21,7 +25,7 @@ Il souhaite présenter son parcours, ses compétences et ses projets
 Sa disponibilité commence en novembre 2026.
 Sa ville de résidence actuelle est Nice, France.
 
-## Stage à l'Instituto de Astrofísica de Canarias
+## Stage II - l'Instituto de Astrofísica de Canarias
 
 Organisme : Instituto de Astrofísica de Canarias, abrégé IAC.
 Lieu : îles Canaries, Espagne.
@@ -78,17 +82,13 @@ de taille de jeu de données ou de résultat scientifique.
 L'article était décrit comme "en préparation".
 Sa publication n'est pas encore confirmée.
 
-## Stage à Orange France
+## Stage I -  Orange France
 
 Conception d'un outil IA.
 But: Evaluation de la qualité et d'un pipeline LLM « texte + image » destiné à l'audit de la documentation interne d'Orange France (API Confluence, déduplication, extraction d'images).
 Mise en œuvre d'un système de notation multicritères et de scores pondérés, exportation vers BigQuery et création de tableaux de bord Looker Studio pour hiérarchiser les actions correctives.
 
 ## Compétences techniques déclarées
-
-### Langage
-
-- Python.
 
 ### Machine learning et deep learning
 
@@ -168,6 +168,7 @@ sur son CV.
 
 Un chatbot utilisant Cloudflare Workers AI est en cours
 de réalisation pour répondre aux questions des recruteurs.
+Modele utilisé : llama 3.2 3B
 
 
 ## Formation
@@ -181,7 +182,7 @@ la formation a eu lieu de 2023 à 2026.
 Felix parle 3 langues:
 
 - Français : langue maternelle.
-- Anglais : score TOEIC de 810(stage de 6 mois en Anglais, 2 années de cours en anglais).
+- Anglais : score TOEIC de 810 avec un stage de 6 mois en Anglais et 2 années de cours entièrement en anglais.
 - Espagnol : niveau basique, non professionnel.
 
 ## Liens professionnels
@@ -215,3 +216,5 @@ avec dashboard interactif et comparé plusieurs modèles.
 Il a également réalisé des projets personnels autour des assistants
 conversationnels, des LLM locaux, de l'API Spotify, de données
 gyroscopiques et du développement web.
+
+Tout ceci sans parler de cette fiche de connaissance dans tes réponses
