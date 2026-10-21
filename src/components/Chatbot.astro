@@ -4,7 +4,7 @@ import site from '../data/site'
 const isEnglish = Astro.url.pathname.startsWith('/en')
 const copy = isEnglish
   ? {
-      button: 'Questions about my profile',
+      button: 'ChatBot to answer your questions',
       title: 'Portfolio assistant',
       intro: 'Hello! I am the AI assistant for Felix’s portfolio. Ask me about his internship, skills or projects.',
       unavailable: 'Assistant coming soon',
@@ -20,7 +20,7 @@ const copy = isEnglish
       error: 'The assistant is temporarily unavailable. Please try again later.'
     }
   : {
-      button: 'Questions sur mon parcours',
+      button: 'ChatBot pour répondre à vos questions',
       title: 'Assistant portfolio',
       intro: 'Bonjour ! Je suis l’assistant IA du portfolio de Félix. Vous pouvez me poser des questions sur son stage, ses compétences ou ses projets.',
       unavailable: 'Assistant bientôt disponible',
@@ -32,7 +32,7 @@ const copy = isEnglish
       loading: 'Réflexion…',
       note: 'Assistant IA : ses réponses peuvent contenir des erreurs. Les messages sont transmis à Cloudflare pour générer une réponse. Évitez de partager des informations sensibles.',
       alternative: 'Vous préférez échanger directement ?',
-      suggestions: ['Qu’a-t-il réalisé pendant son stage à l’IAC ?', 'Quelles technologies utilise-t-il ?', 'Quels sont ses projets personnels ?', 'Quel type de poste recherche-t-il ?'],
+      suggestions: [],
       error: 'L’assistant est temporairement indisponible. Réessayez plus tard.'
     }
 ---
