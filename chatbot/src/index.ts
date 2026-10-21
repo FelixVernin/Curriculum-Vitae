@@ -37,7 +37,7 @@ const MAX_MESSAGE_CHARS = 1000
 const MAX_HISTORY_MESSAGES = 6
 const MAX_HISTORY_CHARS = 1500
 const MAX_OUTPUT_TOKENS = 350
-const DEFAULT_MODEL = '@cf/meta/llama-3.2-3b-instruct'
+const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
 const PRODUCTION_ORIGIN = 'https://curriculum-vitae.felix-vernin.workers.dev'
 
 class RequestError extends Error {
