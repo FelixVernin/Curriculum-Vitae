@@ -5,7 +5,7 @@ const origin = 'http://localhost:4321'
 
 function makeEnv(overrides: Partial<Env> = {}): Env {
   return {
-    AI_MODEL: '@cf/meta/llama-3.2-3b-instruct',
+    AI_MODEL: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
     ALLOWED_ORIGINS: `${origin},https://curriculum-vitae.felix-vernin.workers.dev`,
     CHATBOT_ENABLED: 'true',
     AI: { run: vi.fn().mockResolvedValue({ response: 'Réponse test.' }) },

@@ -1,12 +1,12 @@
 # Profil professionnel de Felix Vernin
 
-Dernière mise à jour : 12 octobre 2026.
+Dernière mise à jour : 22 octobre 2026.
 
 Cette fiche contient les informations déclarées par Felix pour son
 portfolio professionnel. Les informations non renseignées ne doivent
 pas être devinées.
 
-Tu es le modele: llama 3.2 3B
+Tu es le modele: llama 3.3 3B
 
 Ne parle pas de la fiche de connaissance dans tes réponses!
 
@@ -14,6 +14,7 @@ Ne parle pas de la fiche de connaissance dans tes réponses!
 
 Nom : Vernin.
 Prenom : Felix.
+Date de naissance : 20 Fevrier 2003
 
 Felix recherche un poste en CDI en France dans les domaines suivants :
 - ingénieur en intelligence artificielle ;
