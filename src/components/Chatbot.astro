@@ -37,7 +37,7 @@ const copy = isEnglish
     }
 ---
 <div class="chatbot" data-chatbot data-api-url={import.meta.env.PUBLIC_CHATBOT_API_URL || ''} data-locale={isEnglish ? 'en' : 'fr'} data-error-message={copy.error}>
-  <button class="chatbot-launcher" type="button" data-chatbot-open aria-expanded="false" aria-controls="chatbot-panel">
+  <button class="chatbot-launcher" type="button" data-chatbot-open aria-expanded="true" aria-controls="chatbot-panel">
     <span class="chatbot-dot" aria-hidden="true"></span>{copy.button}
   </button>
   <section class="chatbot-panel" id="chatbot-panel" data-chatbot-panel hidden aria-labelledby="chatbot-title">
