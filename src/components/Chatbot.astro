@@ -40,7 +40,7 @@ const copy = isEnglish
   <button class="chatbot-launcher" type="button" data-chatbot-open aria-expanded="true" aria-controls="chatbot-panel">
     <span class="chatbot-dot" aria-hidden="true"></span>{copy.button}
   </button>
-  <section class="chatbot-panel" id="chatbot-panel" data-chatbot-panel hidden aria-labelledby="chatbot-title">
+  <section class="chatbot-panel" id="chatbot-panel" data-chatbot-panel aria-labelledby="chatbot-title">
     <div class="chatbot-head">
       <div><p class="chatbot-kicker">RECRUITER_MODE / AI</p><h2 id="chatbot-title">{copy.title}</h2></div>
       <div class="chatbot-head-actions"><button class="chatbot-clear" type="button" data-chatbot-clear>{copy.clear}</button><button class="chatbot-close" type="button" data-chatbot-close aria-label={copy.close}>×</button></div>
